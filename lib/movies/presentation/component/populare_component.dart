@@ -9,7 +9,7 @@ import 'package:movieapp/movies/presentation/screens/movie_detail_screen.dart';
 import 'package:shimmer/shimmer.dart';
 
 class PopularComponent extends StatelessWidget {
-  const PopularComponent({Key? key}) : super(key: key);
+  const PopularComponent({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MoviesBloc, MoviesState>(
@@ -18,9 +18,7 @@ class PopularComponent extends StatelessWidget {
         builder: (context, state) {
           switch (state.populareState) {
             case RequestState.loading:
-              return Container(
-                child: Center(child: CircularProgressIndicator()),
-              );
+              return const Center(child: CircularProgressIndicator());
 
             case RequestState.loaded:
               return FadeIn(
@@ -45,29 +43,32 @@ class PopularComponent extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      MovieDetailScreen(id: movie.id)));
+                                      MovieDetailScreen(movie: movie)));
                         },
                         child: ClipRRect(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(8.0)),
-                          child: CachedNetworkImage(
-                            width: 120.0,
-                            fit: BoxFit.cover,
-                            imageUrl: ApiConstance.imageUrl(movie.backdropPath),
-                            placeholder: (context, url) => Shimmer.fromColors(
-                              baseColor: Colors.grey[850]!,
-                              highlightColor: Colors.grey[800]!,
-                              child: Container(
-                                height: 170.0,
-                                width: 120.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.circular(8.0),
+                          child: Hero(
+                            tag: movie.id,
+                            child: CachedNetworkImage(
+                              width: 120.0,
+                              fit: BoxFit.cover,
+                              imageUrl: ApiConstance.imageUrl(movie.backdropPath),
+                              placeholder: (context, url) => Shimmer.fromColors(
+                                baseColor: Colors.grey[850]!,
+                                highlightColor: Colors.grey[800]!,
+                                child: Container(
+                                  height: 170.0,
+                                  width: 120.0,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
                                 ),
                               ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
                             ),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
                           ),
                         ),
                       ),

@@ -4,9 +4,7 @@ import 'package:movieapp/core/error/exceptions.dart';
 import 'package:movieapp/core/error/failure.dart';
 import 'package:movieapp/movies/data/datasource/movie_remote_data_source.dart';
 import 'package:movieapp/movies/domian/entities/movie.dart';
-import 'package:movieapp/movies/domian/entities/movie_details.dart';
 import 'package:movieapp/movies/domian/repository/base_movie_repository.dart';
-import 'package:movieapp/movies/domian/usecase/get_movie_details_usecase.dart';
 
 
 class MoviesReository extends BaseMovieRepository {
@@ -27,18 +25,5 @@ class MoviesReository extends BaseMovieRepository {
     }
   }
 
-  @override
-
-
-  @override
-  Future<Either<Failure, MovieDetails>> getMovieDetails(
-      MovieDetailsParameters parameters) async {
-    final result = await baseMovieRemoteDataSource.getMoviDetails(parameters);
-    try {
-      return Right(result);
-    } on ServerExceptions catch (failure) {
-      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
-    }
-  }
 
 }

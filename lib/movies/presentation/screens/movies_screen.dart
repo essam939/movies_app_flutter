@@ -15,7 +15,7 @@ class MoviesScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Movies'),
         ),
-        body: PopularComponent(),
+        body: const PopularComponent(),
       ),
     );
   }

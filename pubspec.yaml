@@ -49,9 +49,13 @@ dependencies:
   mockito: ^5.4.4
   retrofit: ^4.2.0
   injectable: ^2.4.4
+  json_annotation: ^4.9.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner:
+  retrofit_generator: ^8.2.1
+  injectable_generator: ^2.6.2
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -59,6 +63,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
+  json_serializable: ^6.8.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -5,6 +5,7 @@ import 'package:movieapp/core/error/failure.dart';
 import 'package:movieapp/movies/data/datasource/movie_remote_data_source.dart';
 import 'package:movieapp/movies/domian/entities/movie.dart';
 import 'package:movieapp/movies/domian/repository/base_movie_repository.dart';
+import 'package:movieapp/movies/domian/usecase/search_on_movie.dart';
 
 
 class MoviesReository extends BaseMovieRepository {
@@ -18,6 +19,16 @@ class MoviesReository extends BaseMovieRepository {
   @override
   Future<Either<Failure, List<Movie>>> getPoupulareMovies() async {
     final result = await baseMovieRemoteDataSource.getPupulareMovies();
+    try {
+      return Right(result);
+    } on ServerExceptions catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Movie>>> searchOnMovie(SearchOnMovieParameters parameters) async {
+    final result = await baseMovieRemoteDataSource.searchOnMovie(parameters);
     try {
       return Right(result);
     } on ServerExceptions catch (failure) {

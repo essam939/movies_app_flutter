@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/core/services/services_locator.dart';
 import 'package:movieapp/movies/presentation/component/populare_component.dart';
 import 'package:movieapp/movies/presentation/controller/movies_bloc/movies_bloc.dart';
+import 'package:movieapp/movies/presentation/screens/search_screen.dart';
 
 class MoviesScreen extends StatelessWidget {
   const MoviesScreen({super.key});
@@ -14,6 +15,14 @@ class MoviesScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Movies'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen()));
+              },
+              icon: const Icon(Icons.search),
+            )
+          ],
         ),
         body: const PopularComponent(),
       ),

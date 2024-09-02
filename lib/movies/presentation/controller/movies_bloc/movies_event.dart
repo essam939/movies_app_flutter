@@ -8,3 +8,7 @@ abstract class MoviesEvent extends Equatable {
 }
 
 class GetPopularMoviesEvent extends MoviesEvent {}
+class SearchOnMovieEvent extends MoviesEvent {
+  final String movieName;
+  const SearchOnMovieEvent({required this.movieName});
+}

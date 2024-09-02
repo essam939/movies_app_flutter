@@ -5,6 +5,7 @@ import 'package:movieapp/core/network/api_constance.dart';
 import 'package:movieapp/core/services/services_locator.dart';
 import 'package:movieapp/core/utilis/enums.dart';
 import 'package:movieapp/movies/presentation/controller/movies_bloc/movies_bloc.dart';
+import 'package:movieapp/movies/presentation/screens/movie_detail_screen.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -41,8 +42,6 @@ class SearchScreen extends StatelessWidget {
               Expanded(
                 child: BlocBuilder<MoviesBloc, MoviesState>(
                   builder: (context, state) {
-                    print("jijiscj ${state.searchMovies}");
-                    print("jijiscj ${state.searchState}");
                     switch (state.searchState) {
                       case RequestState.loading: return const SizedBox();
                       case RequestState.loaded:
@@ -51,27 +50,33 @@ class SearchScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             final movie = state.searchMovies[index];
                             return ListTile(
-                              leading: CachedNetworkImage(
-                                width: 120.0,
-                                fit: BoxFit.cover,
-                                imageUrl:
-                                    ApiConstance.imageUrl(movie.backdropPath),
-                                placeholder: (context, url) =>
-                                    Shimmer.fromColors(
-                                  baseColor: Colors.grey[850]!,
-                                  highlightColor: Colors.grey[800]!,
-                                  child: Container(
-                                    height: 170.0,
-                                    width: 120.0,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius:
-                                          BorderRadius.circular(8.0),
+                                 onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetailScreen(movie: movie)));
+                              },
+                              leading: Hero(
+                                tag: movie.id,
+                                child: CachedNetworkImage(
+                                  width: 120.0,
+                                  fit: BoxFit.cover,
+                                  imageUrl:
+                                      ApiConstance.imageUrl(movie.backdropPath),
+                                  placeholder: (context, url) =>
+                                      Shimmer.fromColors(
+                                    baseColor: Colors.grey[850]!,
+                                    highlightColor: Colors.grey[800]!,
+                                    child: Container(
+                                      height: 170.0,
+                                      width: 120.0,
+                                      decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
                                     ),
                                   ),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
                                 ),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
                               ),
                               title: Text(movie.title),
                               subtitle: Text(movie.releaseDate),

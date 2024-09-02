@@ -13,7 +13,7 @@ class ServicesLocator {
   void init() {
     // bloc
     // to refactor bloc
-    sl.registerFactory(() => MoviesBloc(sl(),sl()));
+    sl.registerLazySingleton(() => MoviesBloc(sl(),sl()));
     // use cases
     sl.registerLazySingleton(() => GetPupulareMoviesUseCase(sl()));
     sl.registerLazySingleton(() => SearchOnMovieUseCase(sl()));

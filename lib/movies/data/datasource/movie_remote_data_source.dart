@@ -25,7 +25,6 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>> searchOnMovie(SearchOnMovieParameters parameters) async {
-    print("searchOnMovie: ${parameters.movieName}");
     final response = await Dio().get(ApiConstance.searchMoviePath,queryParameters: {
       "query":parameters.movieName
     });

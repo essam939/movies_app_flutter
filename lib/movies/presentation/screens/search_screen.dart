@@ -20,80 +20,72 @@ class SearchScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Movie Search'),
         ),
-        body: BlocProvider(
-          create: (context) => sl<MoviesBloc>(),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                TextField(
-                  autofocus: true,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.search,
-                  controller: _controller,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter movie name',
-                    suffixIcon: Icon(Icons.search),
-                  ),
-                  onChanged: (text) {
-
-                    sl<MoviesBloc>().add(SearchOnMovieEvent(movieName: text));
-                  },
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextField(
+                autofocus: true,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.search,
+                controller: _controller,
+                decoration: const InputDecoration(
+                  hintText: 'Enter movie name',
+                  suffixIcon: Icon(Icons.search),
                 ),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: BlocBuilder<MoviesBloc, MoviesState>(
-                    builder: (context, state) {
-print("fffff ${state.searchState}");
-                      switch (state.searchState) {
-                        case RequestState.loading:
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        case RequestState.loaded:
-                          return ListView.builder(
-                            itemCount: state.searchMovies.length,
-                            itemBuilder: (context, index) {
-                              final movie = state.searchMovies[index];
-                              return ListTile(
-                                leading: CachedNetworkImage(
-                                  width: 120.0,
-                                  fit: BoxFit.cover,
-                                  imageUrl:
-                                      ApiConstance.imageUrl(movie.backdropPath),
-                                  placeholder: (context, url) =>
-                                      Shimmer.fromColors(
-                                    baseColor: Colors.grey[850]!,
-                                    highlightColor: Colors.grey[800]!,
-                                    child: Container(
-                                      height: 170.0,
-                                      width: 120.0,
-                                      decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
+                onChanged: (text) {
+                  sl<MoviesBloc>().add(SearchOnMovieEvent(movieName: text));
+                },
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: BlocBuilder<MoviesBloc, MoviesState>(
+                  builder: (context, state) {
+                    print("jijiscj ${state.searchMovies}");
+                    print("jijiscj ${state.searchState}");
+                    switch (state.searchState) {
+                      case RequestState.loading: return const SizedBox();
+                      case RequestState.loaded:
+                        return ListView.builder(
+                          itemCount: state.searchMovies.length,
+                          itemBuilder: (context, index) {
+                            final movie = state.searchMovies[index];
+                            return ListTile(
+                              leading: CachedNetworkImage(
+                                width: 120.0,
+                                fit: BoxFit.cover,
+                                imageUrl:
+                                    ApiConstance.imageUrl(movie.backdropPath),
+                                placeholder: (context, url) =>
+                                    Shimmer.fromColors(
+                                  baseColor: Colors.grey[850]!,
+                                  highlightColor: Colors.grey[800]!,
+                                  child: Container(
+                                    height: 170.0,
+                                    width: 120.0,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius:
+                                          BorderRadius.circular(8.0),
                                     ),
                                   ),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
                                 ),
-                                title: Text(movie.title),
-                                subtitle: Text(movie.releaseDate),
-                              );
-                            },
-                          );
-
-                        case RequestState.error:
-                          return Container();
-                        default:
-                          return const Center(
-                              child: Text('Enter a movie name to search.'));
-                      }
-                    },
-                  ),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                              ),
+                              title: Text(movie.title),
+                              subtitle: Text(movie.releaseDate),
+                            );
+                          },
+                        );
+        
+                      case RequestState.error:
+                        return Container();
+                    }
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

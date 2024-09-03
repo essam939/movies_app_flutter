@@ -7,7 +7,7 @@ This Flutter application is designed to demonstrate proficiency in Clean Archite
 The project is organized into several core components to ensure maintainability and scalability, following Clean Architecture principles.
 
 ### Directory Structure
-'''
+ ```
 📦lib
  ┣ 📂core
  ┃ ┣ 📂error
@@ -57,7 +57,7 @@ The project is organized into several core components to ensure maintainability 
  ┃ ┃ ┃ ┗ 📜search_screen.dart
  ┣ 📜main.dart
  ┗ 📜splash_screen.dart
-'''
+ ```
 
 ### Core Modules
 

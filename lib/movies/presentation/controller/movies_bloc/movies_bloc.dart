@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/core/usecase/base_use_case.dart';
 import 'package:movieapp/core/utilis/enums.dart';
-import 'package:movieapp/movies/domian/entities/movie.dart';
+import 'package:movieapp/movies/data/model/movie.dart';
 import 'package:movieapp/movies/domian/usecase/get_pupulare_movies.dart';
 import 'package:movieapp/movies/domian/usecase/search_on_movie.dart';
 

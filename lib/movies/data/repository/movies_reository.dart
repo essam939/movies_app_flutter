@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:movieapp/core/error/exceptions.dart';
 import 'package:movieapp/core/error/failure.dart';
 import 'package:movieapp/movies/data/datasource/movie_remote_data_source.dart';
-import 'package:movieapp/movies/domian/entities/movie.dart';
+import 'package:movieapp/movies/data/model/movie.dart';
 import 'package:movieapp/movies/domian/repository/base_movie_repository.dart';
 import 'package:movieapp/movies/domian/usecase/search_on_movie.dart';
 

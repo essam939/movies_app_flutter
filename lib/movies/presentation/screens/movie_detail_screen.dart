@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movieapp/core/network/api_constance.dart';
-import 'package:movieapp/movies/domian/entities/movie.dart';
+import 'package:movieapp/movies/data/model/movie.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   final Movie movie;

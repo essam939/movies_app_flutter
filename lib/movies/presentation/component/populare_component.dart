@@ -21,21 +21,20 @@ class PopularComponent extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
 
             case RequestState.loaded:
-              return FadeIn(
-                duration: const Duration(milliseconds: 500),
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 8.0,
-                    crossAxisSpacing: 8.0,
-                    childAspectRatio: 0.7,
-                  ),
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  itemCount: state.populareMovies.length,
-                  itemBuilder: (context, index) {
-                    final movie = state.populareMovies[index];
-                    return Container(
+              return GridView.builder(
+                physics:const BouncingScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 8.0,
+                  crossAxisSpacing: 8.0,
+                  childAspectRatio: 0.7,
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                itemCount: state.populareMovies.length,
+                itemBuilder: (context, index) {
+                  final movie = state.populareMovies[index];
+                  return FadeIn(
+                    child: Container(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: InkWell(
                         onTap: () {
@@ -72,9 +71,9 @@ class PopularComponent extends StatelessWidget {
                           ),
                         ),
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               );
 
             case RequestState.error:

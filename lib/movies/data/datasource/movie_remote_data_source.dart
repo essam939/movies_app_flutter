@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:movieapp/core/network/api_constance.dart';
-import 'package:movieapp/movies/data/model/movie.dart';
-import 'package:movieapp/movies/domian/usecase/search_on_movie.dart';
 
 part 'movie_remote_data_source.g.dart'; 
 

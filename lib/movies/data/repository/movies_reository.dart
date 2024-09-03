@@ -26,7 +26,7 @@ class MoviesReository extends BaseMovieRepository {
     } on ServerExceptions catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     } catch (error) {
-      return Left(ServerFailure('Unexpected error occurred'));
+      return const Left( ServerFailure('Unexpected error occurred'));
     }
   }
 
@@ -42,7 +42,7 @@ class MoviesReository extends BaseMovieRepository {
     } on ServerExceptions catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     } catch (error) {
-      return Left(ServerFailure('Unexpected error occurred'));
+      return const Left(ServerFailure('Unexpected error occurred'));
     }
   }
 

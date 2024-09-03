@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movieapp/core/network/api_constance.dart';
-import 'package:movieapp/core/services/services_locator.dart';
+import 'package:movieapp/core/services/injection.dart';
 import 'package:movieapp/core/utilis/enums.dart';
 import 'package:movieapp/movies/presentation/controller/movies_bloc/movies_bloc.dart';
 import 'package:movieapp/movies/presentation/screens/movie_detail_screen.dart';
@@ -16,7 +16,7 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<MoviesBloc>(),
+      create: (context) => getIt<MoviesBloc>(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Movie Search'),
@@ -35,7 +35,7 @@ class SearchScreen extends StatelessWidget {
                   suffixIcon: Icon(Icons.search),
                 ),
                 onChanged: (text) {
-                  sl<MoviesBloc>().add(SearchOnMovieEvent(movieName: text));
+                  getIt<MoviesBloc>().add(SearchOnMovieEvent(movieName: text));
                 },
               ),
               const SizedBox(height: 20),

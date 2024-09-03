@@ -15,7 +15,7 @@ class Movie extends Equatable {
 
   const Movie({
     required this.id,
-  required  this.title, 
+    required this.title,
     required this.backdropPath,
     required this.genderIds,
     required this.overView,
@@ -25,7 +25,7 @@ class Movie extends Equatable {
 
   factory Movie.fromJson(Map<String, dynamic> json) => Movie(
         id: json["id"],
-        title: json["title"]??"",
+        title: json["title"] ?? "",
         backdropPath: json["backdrop_path"] ?? "",
         genderIds: List<int>.from(json["genre_ids"].map((e) => e)),
         overView: json["overview"] ?? "",

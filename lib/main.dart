@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movieapp/core/services/services_locator.dart';
+import 'package:movieapp/core/services/injection.dart';
 import 'package:movieapp/splash_screen.dart';
 
 void main() {
-  ServicesLocator().init();
+ configureDependencies();
   runApp(const MyApp());
 }
 

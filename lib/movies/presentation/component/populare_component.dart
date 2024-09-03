@@ -6,6 +6,7 @@ import 'package:movieapp/core/network/api_constance.dart';
 import 'package:movieapp/core/utilis/enums.dart';
 import 'package:movieapp/movies/presentation/controller/movies_bloc/movies_bloc.dart';
 import 'package:movieapp/movies/presentation/screens/movie_detail_screen.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shimmer/shimmer.dart';
 
 class PopularComponent extends StatelessWidget {
@@ -21,14 +22,13 @@ class PopularComponent extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
 
             case RequestState.loaded:
-              return GridView.builder(
+              return ResponsiveGridView.builder(
                 physics:const BouncingScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 8.0,
-                  crossAxisSpacing: 8.0,
-                  childAspectRatio: 0.7,
-                ),
+            gridDelegate: const ResponsiveGridDelegate(
+              mainAxisSpacing: 2,
+              crossAxisSpacing: 2,
+              maxCrossAxisExtent: 200,
+            ),   
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 itemCount: state.populareMovies.length,
                 itemBuilder: (context, index) {

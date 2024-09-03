@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
-      builder: (context, child) => ResponsiveBreakpoints.builder(
+      builder: (context, child) => ResponsiveBreakpoints.builder(   
         child: child!,
         breakpoints: [
           const Breakpoint(start: 0, end: 450, name: MOBILE),

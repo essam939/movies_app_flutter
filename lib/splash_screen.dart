@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movieapp/core/utilis/app_images.dart';
 import 'package:movieapp/movies/presentation/screens/movies_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -9,7 +10,8 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
 
@@ -31,7 +33,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     _animationController.forward();
 
-    // Navigate to the main screen after a delay
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const MoviesScreen()),
@@ -58,9 +59,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
               Container(
                 width: 150.0,
                 height: 150.0,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage('https://cdn3.iconfinder.com/data/icons/redmoon-google/512/google_movies-512.png'),
+                    image: AssetImage(AppImages.logo),
                     fit: BoxFit.contain,
                   ),
                 ),

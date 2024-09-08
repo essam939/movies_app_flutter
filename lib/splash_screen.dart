@@ -68,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen>
               ),
               const SizedBox(height: 20),
               const Text(
-                'MovieFlix', // Replace with your app name
+                'MovieFlix',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,

@@ -117,7 +117,6 @@ class MovieDetailScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Tab(text: 'More like this'.toUpperCase()),
         ],
       ),
     );

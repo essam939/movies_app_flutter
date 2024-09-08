@@ -7,9 +7,17 @@ part 'movie.g.dart';
 class Movie extends Equatable {
   final int id;
   final String title;
+  
+  @JsonKey(name: 'backdrop_path')
   final String backdropPath;
+
+  @JsonKey(name: 'overview')
   final String overView;
+
+  @JsonKey(name: 'vote_average')
   final double voteAvrage;
+
+  @JsonKey(name: 'release_date')
   final String releaseDate;
 
   const Movie({

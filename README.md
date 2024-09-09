@@ -104,7 +104,7 @@ The application uses **Bloc** for state management. Bloc (Business Logic Compone
 2. **Navigate** to the project directory.
 3. Run `flutter pub get` to install the necessary dependencies.
 4. Obtain a free API key from [TMDb API](https://developer.themoviedb.org/docs/getting-started) and replace `YOUR_API_KEY` in the API-related files.
-5. Run the app using `flutter run`.
+5. Run the app using `flutter run --flavor <flavorName> -t lib/main_<flavorName>.dart`.
 
 ## Additional Information
 

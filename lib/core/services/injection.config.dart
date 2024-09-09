@@ -33,6 +33,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final servicesModule = _$ServicesModule();
+    gh.factory<_i187.MoviesBloc>(() => servicesModule.moviesBloc);
     gh.lazySingleton<_i5.MovieRemoteDataSource>(
         () => servicesModule.movieRemoteDataSource);
     gh.lazySingleton<_i61.BaseMovieRepository>(
@@ -41,7 +42,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => servicesModule.getPupulareMoviesUseCase);
     gh.lazySingleton<_i254.SearchOnMovieUseCase>(
         () => servicesModule.searchOnMovieUseCase);
-    gh.lazySingleton<_i187.MoviesBloc>(() => servicesModule.moviesBloc);
     return this;
   }
 }

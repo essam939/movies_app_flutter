@@ -5,21 +5,54 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "movies_app_flutter",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "movies_app_flutter (profile mode)",
+            "name": "movies (dev)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "program": "lib/main_dev.dart",
+            "args": [
+                "--flavor",
+                "dev",
+                "--target",
+                "lib/main_dev.dart"
+            ]
         },
         {
-            "name": "movies_app_flutter (release mode)",
+            "name": "movies (prod)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "program": "lib/main_dev.dart",
+            "args": [
+                "--flavor",
+                "prod",
+                "--target",
+                "lib/main_prod.dart"
+            ]
+        },
+        {
+            "name": "movies (profile dev)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "program": "lib/main_dev.dart",
+            "args": [
+                "--flavor",
+                "dev",
+                "--target",
+                "lib/main_dev.dart"
+            ]
+        },
+        {
+            "name": "movies (release dev)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "program": "lib/main_dev.dart",
+            "args": [
+                "--flavor",
+                "dev",
+                "--target",
+                "lib/main_dev.dart"
+            ]
         }
     ]
 }

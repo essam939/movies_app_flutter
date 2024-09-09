@@ -10,88 +10,92 @@ import 'package:shimmer/shimmer.dart';
 
 class SearchScreen extends StatelessWidget {
   final TextEditingController _controller = TextEditingController();
-
-  SearchScreen({super.key});
+  final MoviesBloc moviesBloc;
+  SearchScreen({super.key, required this.moviesBloc});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<MoviesBloc>(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Movie Search'),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              TextField(
-                autofocus: true,
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.search,
-                controller: _controller,
-                decoration: const InputDecoration(
-                  hintText: 'Enter movie name',
-                  suffixIcon: Icon(Icons.search),
-                ),
-                onChanged: (text) {
-                  getIt<MoviesBloc>().add(SearchOnMovieEvent(movieName: text));
-                },
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Movie Search'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              autofocus: true,
+              keyboardType: TextInputType.text,
+              textInputAction: TextInputAction.search,
+              controller: _controller,
+              decoration: const InputDecoration(
+                hintText: 'Enter movie name',
+                suffixIcon: Icon(Icons.search),
               ),
-              const SizedBox(height: 20),
-              Expanded(
-                child: BlocBuilder<MoviesBloc, MoviesState>(
-                  builder: (context, state) {
-                    switch (state.searchState) {
-                      case RequestState.loading: return const SizedBox();
-                      case RequestState.loaded:
-                        return ListView.builder(
-                          itemCount: state.searchMovies.length,
-                          itemBuilder: (context, index) {
-                            final movie = state.searchMovies[index];
-                            return ListTile(
-                                 onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => MovieDetailScreen(movie: movie)));
-                              },
-                              leading: Hero(
-                                tag: movie.id,
-                                child: CachedNetworkImage(
-                                  width: 120.0,
-                                  fit: BoxFit.cover,
-                                  imageUrl:
-                                      ApiConstance.imageUrl(movie.backdropPath),
-                                  placeholder: (context, url) =>
-                                      Shimmer.fromColors(
-                                    baseColor: Colors.grey[850]!,
-                                    highlightColor: Colors.grey[800]!,
-                                    child: Container(
-                                      height: 170.0,
-                                      width: 120.0,
-                                      decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
+              onChanged: (text) {
+                if (text.isNotEmpty) {
+                  moviesBloc.add(SearchOnMovieEvent(movieName: text));
+                }
+              },
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: BlocBuilder<MoviesBloc, MoviesState>(
+                bloc: moviesBloc,
+                builder: (context, state) {
+                  switch (state.searchState) {
+                    case RequestState.loading:
+                      return const SizedBox();
+                    case RequestState.loaded:
+                      return ListView.builder(
+                        itemCount: state.searchMovies.length,
+                        itemBuilder: (context, index) {
+                          final movie = state.searchMovies[index];
+                          return ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          MovieDetailScreen(movie: movie)));
+                            },
+                            leading: Hero(
+                              tag: movie.id,
+                              child: CachedNetworkImage(
+                                width: 120.0,
+                                fit: BoxFit.cover,
+                                imageUrl:
+                                    ApiConstance.imageUrl(movie.backdropPath),
+                                placeholder: (context, url) =>
+                                    Shimmer.fromColors(
+                                  baseColor: Colors.grey[850]!,
+                                  highlightColor: Colors.grey[800]!,
+                                  child: Container(
+                                    height: 170.0,
+                                    width: 120.0,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius: BorderRadius.circular(8.0),
                                     ),
                                   ),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
                                 ),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
                               ),
-                              title: Text(movie.title),
-                              subtitle: Text(movie.releaseDate),
-                            );
-                          },
-                        );
-        
-                      case RequestState.error:
-                        return Container();
-                    }
-                  },
-                ),
+                            ),
+                            title: Text(movie.title),
+                            subtitle: Text(movie.releaseDate),
+                          );
+                        },
+                      );
+
+                    case RequestState.error:
+                      return Container();
+                  }
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

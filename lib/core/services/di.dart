@@ -27,7 +27,7 @@ abstract class ServicesModule {
   SearchOnMovieUseCase get searchOnMovieUseCase =>
       SearchOnMovieUseCase(moviesRepository);
 
-  @lazySingleton
+  @factoryMethod
   MoviesBloc get moviesBloc =>
       MoviesBloc(getPupulareMoviesUseCase, searchOnMovieUseCase);
 }

@@ -1,9 +1,10 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:movieapp/core/services/injection.dart';
 import 'package:movieapp/splash_screen.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-void main() {
+FutureOr<void> main() {
   configureDependencies();
   runApp(const MyApp());
 }

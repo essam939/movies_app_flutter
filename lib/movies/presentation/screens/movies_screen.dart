@@ -18,7 +18,11 @@ class MoviesScreen extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            SearchScreen(moviesBloc: getIt<MoviesBloc>())));
               },
               icon: const Icon(Icons.search),
             )

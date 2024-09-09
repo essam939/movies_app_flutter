@@ -1,0 +1,16 @@
+flavors:
+  dev:
+    app:
+      name: "Movies"
+    android:
+      applicationId: "com.example.movieapp"  
+    ios:
+      bundleId: "com.example.movieapp"
+  prod:
+    app:
+      name: "Movies Dev"
+  
+    android:
+      applicationId: "com.example.movieapp.dev"
+    ios:
+      bundleId: "com.example.movieapp.dev"
